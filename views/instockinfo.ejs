@@ -1,0 +1,57 @@
+<% include _header %>
+<div class="content-wrapper">
+	<div class="container">
+		<!-- container -->
+		<section class="content-header">
+		<!-- make me better -->
+	      <!-- <h1>
+	        Simple Tables
+	        <small>preview of simple tables</small>
+	      </h1> -->
+	    </section>
+	    <!-- ./make me better -->
+		<div class="box">
+      <div class="box-header">
+        <h3 class="box-title">库存清单</h3>
+
+        <div class="box-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tbody><tr>
+            <th>品牌名称</th>
+            <th>商品名称</th>
+            <th>数量</th>
+            <th>价格</th>
+            <th>备注</th>
+            <th>日期</th>
+          </tr>
+          <% transin.forEach(function(result) { %>
+          <tr>
+          <td><%= result.brandname %></td>
+          <td><%= result.productname %></td>
+          <td><%= result.number %></td>
+          <td><%= result.price.toFixed(2) %></td>
+          <td><%= result.additional %></td>
+          <td><%= result.date.getFullYear() + "-" + (result.date.getMonth()+1) + "-" +  result.date.getDate() %></td>
+          </tr>
+          <% }) %>
+
+         
+        </tbody></table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+		<!-- ./container -->
+	</div>
+</div>
+<% include _footer %>

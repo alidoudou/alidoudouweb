@@ -1,0 +1,75 @@
+<% include _header %>
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+      <section class="content-header">
+      </section>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- box -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">入库信息修改</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" method="post" action="/product_update">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">品牌名称</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="brandname" value="<%= prod.brandname %>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">商品名称</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="productname" value="<%= prod.productname %>">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">商品编号</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="productnum" value="<%= prod.productnum %>">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">数量</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="number" value="<%= prod.number %>">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">价格</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="price" value="<%= prod.price %>">
+                  </div>
+                </div> 
+
+                <input type="hidden" name="id" value="<%= prod._id %>">               
+
+              </div>
+
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="submit" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% include _footer %>
