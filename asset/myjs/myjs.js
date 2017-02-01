@@ -70,6 +70,79 @@ $(document).ready(function () {
 			}
 		})
 	})
+	//transaction page delete action
+	$(".transdelete").click(function (event) {
+		// body...
+		event.preventDefault();
+		$("#deleteModal").modal('show');
+		var id = $(this).attr("url")
+
+		$("#btnok").click(function (event) {
+			// confirm delete
+			console.log(id);
+			var params = {
+				id: id
+			}
+
+			$.ajax({
+				type: "POST",
+				data: params,
+				url: "/translistdelete"
+			})
+			.done(function (data) {
+				// body...
+				if (data == "ok") {
+					$(".modal-body").html("<p>数据已删除,正在刷新</p>")
+					setTimeout(function(){
+						$("#deleteModal").modal('hide');
+						$(window.location).attr('href', 'http://localhost:3000/viewtransactionlist');
+					}, 700);
+
+				}
+			})
+			
+		})
+
+	})
+
+
+	//inventory page delete action
+	$(".invdelete").click(function (event) {
+		// body...
+		event.preventDefault();
+		$("#deleteModal").modal('show');
+		var id = $(this).attr("url")
+		console.log(id);
+
+		$("#btnok").click(function (event) {
+			// confirm delete
+			console.log(id);
+			var params = {
+				id: id
+			}
+
+			$.ajax({
+				type: "POST",
+				data: params,
+				url: "/inventorydelete"
+			})
+			.done(function (data) {
+				// body...
+				if (data == "ok") {
+					$(".modal-body").html("<p>数据已删除,正在刷新</p>")
+					setTimeout(function(){
+						$("#deleteModal").modal('hide');
+						$(window.location).attr('href', 'http://localhost:3000/');
+					}, 700);
+
+				}
+			})
+			
+		})
+
+	})
+
+
 
 });
 

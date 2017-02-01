@@ -37,8 +37,20 @@ router.use(function (req, res, next) {
 router.use("/inputbatch",mylib.checkRole);
 router.use("/inputsalesman",mylib.checkRole);
 router.use("/viewtransactionlist",mylib.checkRole);
+router.use("/translistdelete",mylib.checkRole);
+router.use("/inventorymodify",mylib.checkRole);
+router.use("/inventorydelete",mylib.checkRole);
+router.use("/inventory_update",mylib.checkRole);
+router.use("/prodinput",mylib.checkRole);
+router.use("/toprocess",mylib.checkRole);
+router.use("/modify",mylib.checkRole);
+router.use("/product_update",mylib.checkRole);
+router.use("/viewproduct",mylib.checkRole);
+router.use("/translistmodify",mylib.checkRole);
+router.use("/translist_update",mylib.checkRole);
 
 
+//inventory display page
 router.get("/", function (req, res, next) {
 	// body...
 	 Inventory.find(function (err, result) { 
@@ -46,6 +58,71 @@ router.get("/", function (req, res, next) {
         res.render("inventory", { invs: result })
     }) 
 })
+
+
+//inventory date delete
+router.post("/inventorydelete", function (req, res, next) {
+	// body...
+	var id = req.body.id;
+	Inventory.remove({ _id: id }, function (error) {
+		// body...
+		if (error) {
+			console.log("删除inventory时报错" + error);
+		} else {
+			console.log("删除");
+			res.json("ok");
+		}
+	});
+
+})
+
+
+//modify inventory data
+router.get("/inventorymodify/:id", function (req, res, next) {
+	// body...
+	Inventory.findOne({ _id: req.params.id }, function (err, result) {
+		// body...
+		//console.log(JSON.stringify(result));
+		res.render("modifyinv", { inv: result });
+	})
+	
+})
+
+//update transactionlist information
+router.post("/inventory_update", function (req, res, next) {
+	// body...
+	var brandname = req.body.brandname;
+	var productname = req.body.productname;
+	var number = req.body.number;
+	var price = req.body.price;
+	var id = req.body.id;
+
+	var newinventory = {
+		$set: {
+			_id: id,
+			brandname: brandname,
+			productname: productname,
+			number: number,
+			price: price,
+		}
+	}
+
+	Inventory.findOne({ _id: id }, function (err, oldinventory) {
+		// body...
+		Inventory.update(oldinventory, newinventory, function (err, result) {
+			// body...
+			console.log(err);
+			next();
+		})
+	})
+
+}, function (req, res, next) {
+	// body...
+	res.redirect("/");
+})
+
+
+
 
 //inputbath page
 router.get("/inputbatch", function(req, res, next) {
@@ -371,7 +448,7 @@ router.get("/instockinfo", function (req, res, next) {
 
 router.get("/viewtransactionlist", function (req, res, next) { 
         Transactionlist.find(function (err, result) { 
-                res.json(result); 
+        	res.render("transactionlist", { translist: result })
         }) 
 }) 
 
@@ -384,6 +461,72 @@ router.get("/viewproduct", function (req, res, next) {
         res.json(result);
     }) 
 }) 
+
+//translist date delete
+router.post("/translistdelete", function (req, res, next) {
+	// body...
+	var id = req.body.id;
+	Transactionlist.remove({ _id: id }, function (error) {
+		// body...
+		if (error) {
+			console.log("删除translist时报错" + error);
+		} else {
+			console.log("删除");
+			res.json("ok");
+		}
+	});
+
+})
+
+//modify transactionlist data
+router.get("/translistmodify/:id", function (req, res, next) {
+	// body...
+	Transactionlist.findOne({ _id: req.params.id }, function (err, result) {
+		// body...
+		//console.log(JSON.stringify(result));
+		res.render("modifytranslist", { translist: result });
+	})
+	
+})
+
+//update transactionlist information
+router.post("/translist_update", function (req, res, next) {
+	// body...
+	var brandname = req.body.brandname;
+	var productname = req.body.productname;
+	var number = req.body.number;
+	var price = req.body.price;
+	var counterparty = req.body.counterparty;
+	var additional = req.body.additional;
+	var id = req.body.id;
+
+	var newtranslist = {
+		$set: {
+			_id: id,
+			brandname: brandname,
+			productname: productname,
+			number: number,
+			price: price,
+			counterparty: counterparty,
+			additional: additional
+		}
+	}
+
+	Transactionlist.findOne({ _id: id }, function (err, oldtranslist) {
+		// body...
+		console.log(JSON.stringify(oldtranslist));
+		Transactionlist.update(oldtranslist, newtranslist, function (err, result) {
+			// body...
+			console.log(err);
+			next();
+		})
+	})
+
+}, function (req, res, next) {
+	// body...
+	res.redirect("/");
+})
+
 
 
 module.exports = router;

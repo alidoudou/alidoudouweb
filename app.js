@@ -30,6 +30,8 @@ app.set("port", process.env.PORT || 3000);
 
 app.use(express.static(path.join(__dirname, 'asset')));
 app.use('/modify', express.static(path.join(__dirname, 'asset')));
+app.use('/translistmodify', express.static(path.join(__dirname, 'asset')));
+app.use('/inventorymodify', express.static(path.join(__dirname, 'asset')));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -32,27 +32,63 @@
             <th>商品名称</th>
             <th>数量</th>
             <th>价格</th>
-            <th>状态</th>
+            <% if (typeof(currentUser) != "undefined") { %>
+            <% if (currentUser.username == "kang")  { %>
+            <th>修改</th>
+            <% } %>
+            <% } %>
           </tr>
           <% invs.forEach(function(inv) { %>
           <tr>
           <td><%= inv.brandname %></td>
           <td><%= inv.productname %></td>
-          <td><%= inv.number %></td>
-          <td><%= inv.price.toFixed(2) %></td>
+
           <% if (inv.number >= 5) { %>
-          <td><span class="label label-success">库存正常</span></td>
+          <td><span class="badge bg-green"><%= inv.number %></span></td>
           <% } else { %>
-          <td><span class="label label-danger">库存告急</span></td>
+          <td><span class="badge bg-red"><%= inv.number %></span></td>
           <% } %>
+
+          <td><%= inv.price.toFixed(2) %></td>
+
+          <% if (typeof(currentUser) != "undefined") { %>
+          <% if (currentUser.username == "kang")  { %>
+          <th><a href="/inventorymodify/<%= inv._id %>" ><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;<a class="invdelete" href="#" url="<%= inv._id %>"><i class="fa fa-remove"></i></a></th>
+          <% } %>
+          <% } %>
+
           </tr>
           <% }) %>
+
+
 
          
         </tbody></table>
       </div>
       <!-- /.box-body -->
     </div>
+
+    <div class="modal modal-danger fade" id="deleteModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">删除</h4>
+          </div>
+          <div class="modal-body">
+            <p>确定要删除该条记录？</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">关闭</button>
+            <button type="button" id="btnok" class="btn btn-outline">确认</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
 		<!-- ./container -->
 	</div>
 </div>
