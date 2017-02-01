@@ -1,0 +1,92 @@
+<% include _header %>
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+    <div class="container">
+      <section class="content-header">
+      <!-- make me better -->
+        <!-- <h1>
+          Simple Tables
+          <small>preview of simple tables</small>
+        </h1> -->
+      </section>
+      <!-- ./make me better -->
+ 
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">交易明细</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 120px;">品牌名称</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 140px;">商品名称</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 80px;">数量</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 40px;">价格</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 40px;">交易对手</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 80px;">日期</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 390px;">备注</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 80px;">修改</th></tr>
+                </thead>
+                <tbody>
+
+                <% translist.forEach(function(trans, index){ %>
+                  <% if (true) { %>
+                  <tr role="row">
+                    <td class="sorting_1"><%= trans.brandname%></td>
+                    <td><%= trans.productname%></td>
+                    <td><%= trans.number%></td>
+                    <td><%= trans.price.toFixed(2) %></td>
+                    <td><%= trans.counterparty%></td>
+                    <td><%= trans.date.getFullYear() + "-" + (trans.date.getMonth()+1) + "-" + trans.date.getDate() %></td>
+                    <td><%= trans.additional%></td>
+                    <td><a href="/translistmodify/<%= trans._id %>" ><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;<a class="transdelete" href="#" url="<%= trans._id %>"><i class="fa fa-remove"></i></a></td>
+                  </tr>
+                  <%} else { %>
+                  <tr role="row">
+                    <td class="sorting_1"><%= trans.brandname%></td>
+                    <td><%= trans.productname%></td>
+                    <td><%= trans.number%></td>
+                    <td><%= trans.price.toFixed(2) %></td>
+                    <td><%= trans.counterparty%></td>
+                    <td><%= trans.date.getFullYear() + "-" + (trans.date.getMonth()+1) + "-" + trans.date.getDate() %></td>
+                    <td><%= trans.additional%></td>
+                    <td><a href="/translistmodify/<%= trans._id %>" >M</a>/<a class="transdelete" href="#" url="<%= trans._id %>"><i class="fa fa-remove"></i></a></td>
+                  </tr>
+                  <%}%>
+
+                <% }) %>
+                </tbody>
+              </table>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+
+
+          <div class="modal modal-danger fade" id="deleteModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                  <h4 class="modal-title">删除</h4>
+                </div>
+                <div class="modal-body">
+                  <p>确定要删除该条记录？</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">关闭</button>
+                  <button type="button" id="btnok" class="btn btn-outline">确认</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+
+
+
+      <!-- /.content -->
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /.content-wrapper -->
+<% include _footer %>
