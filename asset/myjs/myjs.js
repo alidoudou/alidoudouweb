@@ -142,6 +142,29 @@ $(document).ready(function () {
 
 	})
 
+	//get productname
+	$("#brandname").change(function (event) {
+		// body...
+		$("#productname").removeAttr("disabled")
+
+		var params = {
+			brandname: this.value
+		}
+		$.ajax({
+			type: "POST",
+			data: params,
+			url: "/getpns"
+		})
+		.done(function (data) {
+			// body...
+			for (var i=0; i<data.length; i++) {
+				$("#productname").append(`<option value="${data[i]}">${data[i]}</option>`)
+			}
+		})
+	})
+
+	javascript:window.history.forward(1); 
+
 
 
 });

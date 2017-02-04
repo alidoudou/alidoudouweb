@@ -29,7 +29,7 @@
                     <td class="sorting_1"><%= trans.brandname%></td>
                     <td><%= trans.productname%></td>
                     <td><%= trans.number%></td>
-                    <td><%= trans.price.toFixed(2) %></td>
+                    <td><%= Number(trans.price).toFixed(2) %></td>
                     <td><%= trans.counterparty%></td>
                     <td><%= trans.date.getFullYear() + "-" + (trans.date.getMonth()+1) + "-" + trans.date.getDate() %></td>
                     <td><%= trans.additional%></td>
@@ -40,7 +40,7 @@
                     <td class="sorting_1"><%= trans.brandname%></td>
                     <td><%= trans.productname%></td>
                     <td><%= trans.number%></td>
-                    <td><%= trans.price.toFixed(2) %></td>
+                    <td><%= Number(trans.price).toFixed(2) %></td>
                     <td><%= trans.counterparty%></td>
                     <td><%= trans.date.getFullYear() + "-" + (trans.date.getMonth()+1) + "-" + trans.date.getDate() %></td>
                     <td><%= trans.additional%></td>

@@ -524,7 +524,83 @@ router.post("/translist_update", function (req, res, next) {
 
 }, function (req, res, next) {
 	// body...
-	res.redirect("/");
+	res.redirect("/viewtransactionlist");
+})
+
+//goodssaled
+router.get("/goodssaled", function (req, res, next) {
+	// body...
+	Inventory.find(function (err, invs) {
+		var s = new Set();
+		invs.forEach(function (inv, index) {
+			// body...
+			s.add(inv.brandname)
+
+			// 判断取到最后一个记录
+			if (Number(index+1)  == Number(invs.length)) {
+				// res.json([...s]);
+				res.render("goodssaled", { uniquebns: [...s] })
+			}
+			
+		})
+
+	})
+})
+
+//get productname by brandname
+router.post("/getpns", function (req, res, next) {
+	// body...
+	var brandname = req.body.brandname
+	Inventory.find( { brandname: brandname }, function (err, invs) {
+		// body...
+		var s = new Set();
+		invs.forEach(function (inv, index) {
+			// body...
+			s.add(inv.productname)
+
+			// 判断取到最后一个记录
+			if (Number(index+1)  == Number(invs.length)) {
+				// res.json([...s]);
+				res.json([...s])
+			}
+			
+		})
+	})
+})
+
+
+//saled action in database
+router.post("/goodssaled", function (req, res, next) {
+	// body...
+	var brandname = req.body.brandname;
+	var productname = req.body.productname;
+	var number = req.body.number;
+	var price = req.body.price;
+	var counterparty = req.body.counterparty;
+	var additional = req.body.additional
+
+	Inventory.findOne({ brandname: brandname, productname: productname }, function (err, inv) {
+		// body...
+		inv.number = inv.number - number;
+		inv.save(next);
+		// console.log("inv update")
+	})
+
+	var newtranslist = new Transactionlist({
+		brandname: brandname,
+		productname: productname,
+		number: number,
+		price: price,
+		counterparty: counterparty,
+		date: Date.now(),
+		additional: additional
+	})
+	newtranslist.save(next)
+	// console.log("translist update");
+
+},function (req, res, next) {
+	// body...
+	res.redirect("/")
 })
 
 

@@ -49,7 +49,7 @@
           <td><span class="badge bg-red"><%= inv.number %></span></td>
           <% } %>
 
-          <td><%= inv.price.toFixed(2) %></td>
+          <td><%= (inv.price * 1.5).toFixed(2) %></td>
 
           <% if (typeof(currentUser) != "undefined") { %>
           <% if (currentUser.username == "kang")  { %>
