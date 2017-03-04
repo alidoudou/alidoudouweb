@@ -1,4 +1,4 @@
-// testroutes.js
+// routes.js
 var express = require("express");
 var passport = require("passport");
 
