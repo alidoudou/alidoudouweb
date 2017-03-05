@@ -66,7 +66,10 @@ $(document).ready(function () {
 				$("#toProcessModal").modal("hide");
 				$("#freight").val("");
 				$("#addinfo").val("");
-				$(window.location).attr('href', 'http://localhost:3000/viewtransactionlist');
+				var url = "http://" + window.location.host + "/viewtransactionlist";
+				console.log(url)
+				// $(window.location).attr('href', 'http://localhost:3000/viewtransactionlist');
+				$(window.location).attr('href', url);
 			}
 		})
 	})
@@ -95,7 +98,8 @@ $(document).ready(function () {
 					$(".modal-body").html("<p>数据已删除,正在刷新</p>")
 					setTimeout(function(){
 						$("#deleteModal").modal('hide');
-						$(window.location).attr('href', 'http://localhost:3000/viewtransactionlist');
+						var url = "http://" + window.location.host + "/viewtransactionlist"
+						$(window.location).attr('href', url);
 					}, 700);
 
 				}
@@ -132,7 +136,7 @@ $(document).ready(function () {
 					$(".modal-body").html("<p>数据已删除,正在刷新</p>")
 					setTimeout(function(){
 						$("#deleteModal").modal('hide');
-						$(window.location).attr('href', 'http://localhost:3000/');
+						$(window.location).attr('href', "http://" + window.location.host);
 					}, 700);
 
 				}
@@ -141,6 +145,12 @@ $(document).ready(function () {
 		})
 
 	})
+
+	//tanslist table
+	$('#translist').DataTable();
+
+
+
 
 	//get productname
 	$("#brandname").change(function (event) {
@@ -163,7 +173,6 @@ $(document).ready(function () {
 		})
 	})
 
-	javascript:window.history.forward(1); 
 
 
 

@@ -30,7 +30,7 @@ router.use(function (req, res, next) {
 	res.locals.currentUser = req.user;
 	res.locals.errors = req.flash("error");
 	res.locals.infos = req.flash("info");
-	console.log("登录者: " + getClientIp(req) + " 已登录服务器");
+	// console.log("登录者: " + getClientIp(req) + " 已登录服务器");
 	next();
 })
 

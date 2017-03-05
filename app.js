@@ -26,7 +26,7 @@ var connection = mongoose.connect("mongodb://localhost:27017/myproject8");
 
 autoIncrement.initialize(connection);
 
-app.set("port", process.env.PORT || 80);
+app.set("port", process.env.PORT || 8080);
 
 
 app.use(express.static(path.join(__dirname, 'asset')));
